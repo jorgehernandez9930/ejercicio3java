@@ -1,0 +1,171 @@
+<!--
+Instrucciones:
++ Crear un editor wysiwyg (what you see is what you get) simple
++ Cambiar el texto dentro del div "text" de acuerdo con la selección que se haga del formulario
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise #4: Formatting text</title>
+    <style>
+        div {
+            width: 600px;
+            height: 100px;
+            border: 1px solid black;
+            margin-top: 10px;
+            /* default options */
+            font-family: Arial;
+            font-size: 12pt;
+        }
+        .original {
+            width: 600px;
+            height: 100px;
+            border: 1px solid black;
+            margin-top: 10px;
+            /* default options */
+            font-family: Arial;
+            font-size: 12pt;
+        }
+        .titulo{
+		padding: 0.5rem;
+		background: #20E191;
+		color: #000;
+		text-align: center;
+		font-size: 21px;
+		}
+		select {
+     		background-color: #fff;
+    		border-radius: 5px;
+    		font-family: tahoma;
+    		font-size: 14px;
+     		height: 30px;
+     		padding: 5px;
+     		width: 250px;
+  			}
+  		.fontitalic{ font-style: italic; }
+        .fontbold{ font-weight: bold;  }
+        .fontunder{ text-decoration: underline; }
+
+
+
+    </style>
+
+    <script type="text/javascript">
+		function fuentes()
+		{
+			var lista = document.getElementById("font_family");
+			var valorSeleccionado = lista.options[lista.selectedIndex].value;
+			var textoSeleccionado = lista.options[lista.selectedIndex].text;
+			var texto = document.getElementById('text');
+			var fuenteNueva = texto;
+			
+            if (valorSeleccionado == "Arial") {
+				fuenteNueva.style.fontFamily='arial';
+	        } else if (valorSeleccionado == "Verdana") {
+				fuenteNueva.style.fontFamily='verdana';
+			} else if (valorSeleccionado == "Helvetica") {
+				fuenteNueva.style.fontFamily='helvetica';
+			} else if (valorSeleccionado == "Times New Roman") {
+				fuenteNueva.style.fontFamily='times new roman';
+			} else if (valorSeleccionado == "Courier New") {
+				fuenteNueva.style.fontFamily='courier new';
+			} else{
+				text.setAttribute("class", "original");
+			}    
+         }
+  	</script>
+
+  	<script type="text/javascript">
+		function sizeletra()
+		{
+			var lista = document.getElementById("font_size");
+			var valorSeleccionado = lista.options[lista.selectedIndex].value;
+			var textoSeleccionado = lista.options[lista.selectedIndex].text;
+			var texto = document.getElementById('text');
+			var modificado = texto;
+			
+			if (valorSeleccionado == "8pt") {
+				modificado.style.fontSize='8pt';
+	        } else if (valorSeleccionado == "10pt") {
+				modificado.style.fontSize='10pt';
+			} else if (valorSeleccionado == "12pt") {
+				modificado.style.fontSize='12pt';
+			} else if (valorSeleccionado == "14pt") {
+				modificado.style.fontSize='14pt';
+			} else if (valorSeleccionado == "16pt") {
+				modificado.style.fontSize='16pt';
+			} else if (valorSeleccionado == "18pt") {
+				modificado.style.fontSize='18pt';
+			} else{
+				text.setAttribute("class", "original");
+			}           
+         }
+  	</script>
+
+	<script type="text/javascript">
+	    function check()
+	    {
+	           var italic=document.form.font_italic;
+	           var bold=document.form.font_bold;
+	           var underline=document.form.font_underline;
+	           var texto = document.getElementById('text');
+
+	            if (italic.checked && bold.checked && underline.checked) {
+	            	texto.setAttribute("class", "fontitalic fontbold fontunder");
+	            } 
+	              	else if (bold.checked && italic.checked) {
+	            		texto.setAttribute("class", "fontbold fontitalic");
+	               	}
+	            	else if (bold.checked && underline.checked) {
+	            		texto.setAttribute("class", "fontbold fontunder");
+	            	}
+	            	else if (underline.checked && italic.checked) {
+	            		texto.setAttribute("class", "fontunder fontitalic");
+	            	}
+	            	else if (underline.checked && bold.checked) {
+	            		texto.setAttribute("class", "fontunder fontbold");
+	            	}
+	            	else if (bold.checked) {
+	            		texto.setAttribute("class", "fontbold");
+	            	}
+	            	else if (italic.checked) {
+	            		texto.setAttribute("class", "fontitalic");
+	            	}
+	            	else if (underline.checked) {
+	            		texto.setAttribute("class", "fontunder");
+	               	}
+	            	else{
+	            		texto.setAttribute("class", "original");        		
+	            	}
+	            
+	    }
+	</script>
+
+</head>
+<body>
+<form class="titulo" name="form">
+    <select onchange="fuentes()" name="font_family" id="font_family"">
+        <option value="Arial" selected>Arial</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Helvetica">Helvetica</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Courier New">Courier New</option>
+    </select>
+    <select onchange="sizeletra()" name="font_size" id="font_size">
+        <option value="8pt">8pt</option>
+        <option value="10pt">10pt</option>
+        <option value="12pt" selected>12pt</option>
+        <option value="14pt">14pt</option>
+        <option value="16pt">16pt</option>
+        <option value="18pt">18pt</option>
+    </select>
+    <label>Italic <input onclick="check()" type="checkbox" name="font_italic" id="font_italic"></label>
+    <label>Bold <input onclick="check()" type="checkbox" name="font_bold" id="font_bold"></label>
+    <label>Underline <input onclick="check()" type="checkbox" name="font_underline" id="font_underline"></label>
+</form>
+<center>
+	<div id="text">The quick brown fox jumps over the lazy dog</div>
+</center>
+</body>
+</html>
